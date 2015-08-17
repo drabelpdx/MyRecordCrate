@@ -1,5 +1,10 @@
 class ArtistsController < ApplicationController
-
+  require 'open-uri'
+  require 'json'
+  require 'pp'
+  require 'dotenv'
+  require 'http'
+  
   def index
 
     if params[:search]||params[:artist]||params[:title]

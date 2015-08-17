@@ -2,6 +2,7 @@ class AlbumsController < ApplicationController
   require 'open-uri'
   require 'json'
   require 'pp'
+  require 'dotenv'
   require 'http'
 
   def index
