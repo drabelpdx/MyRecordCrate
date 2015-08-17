@@ -1,0 +1,45 @@
+<h2>Search</h2>
+<br>
+<div class=search-form>
+  <%= form_tag(artists_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+    <div class="input-append">
+      <%= text_field_tag :search, params[:search], placeholder: "Search Terms for Artists or Albums", :size => 60 %>
+
+      <button class="btn" type="submit"><i class="icon-search">Submit</i></button>
+    </div>
+  <% end %>
+</div>
+<br>
+
+<% if @artists %>
+
+  <table class="table">
+    <tbody>
+      <% @artists['results'].in_groups_of(2, false) do |row| %>
+        <tr>
+          <% for artist in row %>
+            <td><img src="<%= artist['thumb'] %>"></td>
+            <td><%= artist['title'] %><br><%= artist['type']%><br>
+              <%= link_to "More Info", artist_path(artist['title'], :url => artist['resource_url'], :pic => artist['thumb']) %><br>
+              <% artist['resource_url'] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="bs-example">
+    <ul class="pager">
+      <% if @artists['pagination']['page'] > 1 %>
+        <li>&larr; <%= link_to "First", artists_path(:method => "get", :page => @artists['pagination']['urls']['first']), :class => "pager" %></li>
+        <li><%= link_to "Prev", artists_path(:method => "get", :page => @artists['pagination']['urls']['prev']), :class => "pager" %></li>
+      <% end%>
+        |  page  <%= @artists['pagination']['page'] %>   of   <%= @artists['pagination']['pages'] %>  |
+      <% if @artists['pagination']['page'] < @artists['pagination']['pages'] %>
+        <li><%= link_to "Next", artists_path(:method => "get", :page => @artists['pagination']['urls']['next']), :class => "pager" %></li>
+        <li><%= link_to "Last", artists_path(:method => "get", :page => @artists['pagination']['urls']['last']), :class => "pager" %> &rarr;</li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>

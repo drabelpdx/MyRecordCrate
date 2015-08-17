@@ -1,0 +1,63 @@
+<h3><%= @results['name'] %></h3>
+<h3><%= @results['title'] %></h3>
+
+<img src="<%= params[:pic] %>">
+<br><br>
+
+<% if @results['realname'] %>
+  <h4>Real Name:</h4>
+    <%= @results['realname'] %>
+  <br>
+<% end %>
+
+<% if @results['profile'] && @results['profile'] != "" %>
+  <h4>Profile:</h4>
+    <%= @results['profile']%><br>
+  <br>
+<% end %>
+
+<% if @results['year'] %>
+  <h4>Release Year:</h4>
+    <%= @results['year']%><br>
+  <br>
+<% end %>
+
+<% if @results['releases_url'] %>
+  <h4>Recordings</h4>
+    <%= link_to "Releases", albums_path(:url => @results['releases_url'], :pic => params[:pic],  :artist => @results['name']) %><br>
+    <br>
+<% end %>
+
+<% if @results['urls'] %>
+  <h4>Related websites:</h4>
+    <% @results['urls'].each do |val| %>
+    <%= link_to val, val, target: "_blank" %><br>
+    <% end %>
+  <br>
+<% end %>
+
+<% if @results['tracklist'] %>
+  <h4>Tracklist</h4>
+  <table class="table">
+    <tbody>
+      <% @results['tracklist'].each do |val| %>
+        <tr>
+          <td><%= val['title'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @results['images'] %>
+  <h4>Pics</h4>
+  <table class="table">
+    <tbody>
+      <% @results['images'].each do |val| %>
+        <tr>
+          <td><img src="<%= val['uri'] %>"></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

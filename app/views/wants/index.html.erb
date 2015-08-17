@@ -1,0 +1,24 @@
+<h3>Want List</h3>
+
+<% if @wantlist %>
+
+  <table class="table">
+    <thead>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Notes</th>
+
+    </thead>
+    <tbody>
+      <% @wantlist['wants'].each do |val| %>
+        <tr>
+          <% val['basic_information']['artists'].each do |artist| %>
+            <td><%= artist['name']%></td>
+          <% end %>
+          <td><%= val['basic_information']['title'] %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,41 @@
+<h2><%= @artist %> Releases</h2>
+
+<br>
+<br><img src="<%= @pic %>">
+
+<% if @albums %>
+  <table class="table">
+    <thead>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Label</th>
+      <th>Add to:</th>
+      <th>Add to:</th>
+    </thead>
+    <tbody>
+      <% @albums['releases'].each do |val| %>
+        <tr>
+          <td><%= val['title'] %></td>
+          <td><%= val['year'] %></td>
+          <td><%= val['label'] %></td>
+          <td><%= link_to 'Want List', method: :put, :id_w => val['id'], :page_w => @passed_url %></td>
+          <td><%= link_to 'Collection', method: :post, :id_c => val['id'], :page_c => @passed_url %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div class="bs-example">
+  <ul class="pager">
+    <% if @albums['pagination']['page'] > 1 %>
+      <li>&larr; <%= link_to "First", albums_path(:method => "get", :page => @albums['pagination']['urls']['first']), :pic => @pic, :artist => @artist, :class => "pager" %></li>
+      <li><%= link_to "Previous", albums_path(:method => "get", :page => @albums['pagination']['urls']['prev']), :pic => @pic, :artist => @artist, :class => "pager" %></li>
+    <% end%>
+      |  page  <%= @albums['pagination']['page'] %>   of   <%= @albums['pagination']['pages'] %>  |
+    <% if @albums['pagination']['page'] < @albums['pagination']['pages'] %>
+      <li><%= link_to "Next", albums_path(:method => "get", :page => @albums['pagination']['urls']['next']), :pic => @pic, :artist => @artist, :class => "pager" %></li>
+      <li><%= link_to "Last", albums_path(:method => "get", :page => @albums['pagination']['urls']['last']), :pic => @pic, :artist => @artist, :class => "pager" %> &rarr;</li>
+    <% end %>
+  </ul>
+</div>
