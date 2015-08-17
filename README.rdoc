@@ -12,7 +12,7 @@ Currently, a user can lookup artist and album information from the database at D
 
 ### Heroku Link ###
 
-https://boiling-scrubland-3764.herokuapp.com/
+https://agile-retreat-9554.herokuapp.com
 
 ### Setup ###
 
@@ -33,6 +33,8 @@ Everything runs off Disogs, no db needed until user accounts can be added.
 ### Debugging ###
 
 If there are any bugs contact drabelpdx@gmail.com
+
+Currently if a user adds two or more items to collection or wantlist from the same page, the app will give a reload error.
 
 ### License ###
 This is free and unencumbered software released into the public domain.
